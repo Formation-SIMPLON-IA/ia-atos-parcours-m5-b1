@@ -70,7 +70,7 @@ ressources/                # 📚 mini-cours d'appui (lecture juste-à-temps)
 
 ## 📚 Ressources
 
-Voir [`./ressources/`](./ressources/) — 7 mini-cours + `liens_officiels.md`.
+Voir [`./ressources/`](./ressources/) — 8 mini-cours + `liens_officiels.md`.
 Lecture **juste-à-temps** : ouvrez le mini-cours de la tâche en cours.
 
 ---

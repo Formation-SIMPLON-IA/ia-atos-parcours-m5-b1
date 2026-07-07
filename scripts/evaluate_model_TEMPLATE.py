@@ -5,7 +5,7 @@ figé, **trace le run dans MLflow**, compare aux seuils, et **sort un code
 retour non-zéro** si dégradation (→ bloque la release en CI).
 
 Renommez ce fichier en `scripts/evaluate_model.py` une fois complété.
-Mini-cours : `03_MLflow_tracking_essentiel.md` + `04_Script_evaluation_CI`.
+Mini-cours : `07_MLflow_tracking_essentiel.md` + `08_Evaluation_continue_seuils`.
 
 Usage cible::
 
