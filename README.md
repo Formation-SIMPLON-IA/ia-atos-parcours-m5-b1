@@ -37,7 +37,7 @@ d'ajouter `backend` + `frontend` et de compléter le reste (cf. TODO).
 | 1 | Service `backend` orchestrateur (`/score`, `/metrics`) | `services/backend/app/main.py` | `02` |
 | 2 | Service `frontend` (formulaire + fetch `/api/score`) | `services/frontend/html/index.html` | — |
 | 3 | Compléter `docker-compose.yml` (backend + frontend) | `docker-compose.yml` | `01` |
-| 4 | Dashboard Grafana custom (3 panels vie/vitesse/qualité) | `grafana/provisioning/dashboards/` | `04` |
+| 4 | Dashboard Grafana custom (3 panels vie/vitesse/comportement) | `grafana/provisioning/dashboards/` | `04` |
 | 5 | Pipeline CI/CD (test → build → push GHCR + tag) | `.github/workflows/ci.yml` | `03` |
 | 6 | Runbook d'astreinte (4 procédures) | `runbook.md` | `05` |
 | **B2** | Évaluation continue + **MLflow** + étape CI bloquante | `scripts/evaluate_model_TEMPLATE.py`, `evaluation_thresholds_TEMPLATE.md` | `03`, `04`, `05`(B2) |
@@ -77,11 +77,14 @@ Lecture **juste-à-temps** : ouvrez le mini-cours de la tâche en cours.
 
 ## ✅ Critères de réussite (rappel)
 
-- `docker compose up --build` démarre les 3 services < 60 s, healthchecks verts.
+- `docker compose up --build` démarre les 3 services de façon **reproductible**, healthchecks verts.
 - `/metrics` exposé côté model **et** backend ; dashboard Grafana provisionné auto.
-- Workflow CI **vert** ; le **contract test** du modèle bloque la release si rouge.
+- Workflow CI **vert** ; le **contract test** du modèle bloque la release si rouge
+  (il vérifie le **contrat technique** de l'API, pas la performance du modèle —
+  ça, c'est l'évaluation continue de B2).
 - (B2) `evaluate_model.py` trace ≥ 2 runs MLflow comparables ; une dégradation
   volontaire (`--degrade`) fait **échouer la release** (exit ≠ 0).
+  ⚠️ `mlruns/` est gitignoré : la preuve passe par l'**artefact CI**, pas par un commit.
 - Runbook : 4 procédures lisibles par un·e SRE non data.
 - Commits binôme : `Co-authored-by:` ou auteurs nominatifs.
 
