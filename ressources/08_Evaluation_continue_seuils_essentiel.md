@@ -16,6 +16,20 @@ C'est le geste C9 (amélioration continue) côté garde-fou. Pas de détection d
 drift ici (c'est M6) : on reste sur des **seuils statiques** sur des métriques
 globales, branchés dans la CI via un **code retour non-zéro**.
 
+## Étape 0 — votre jeu de référence n'existe pas encore
+
+> ⚠️ **Rien dans le repo n'est votre jeu de référence.** `reference_set.csv`
+> est **à produire par vous**, à partir du holdout de M1-B1
+> (`lending_club_holdout.csv`, ~6 000 lignes). Le fichier
+> `data/reference_set_TEMPLATE.csv` livré dans le template est un **exemple de
+> format** de 20 lignes — il montre les colonnes attendues, il ne mesure rien.
+>
+> Où retrouver le holdout M1, comment en tirer votre jeu, et pourquoi sa
+> composition est une décision : **[`../data/README.md`](../data/README.md)**.
+>
+> Le script refuse de démarrer sur un jeu de moins de 100 lignes ou
+> mono-classe : c'est volontaire.
+
 ## Concepts clés
 
 - **Jeu de référence (`reference_set.csv`)** : un sous-échantillon **figé** du

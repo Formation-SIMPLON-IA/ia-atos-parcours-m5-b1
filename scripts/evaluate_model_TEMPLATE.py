@@ -82,6 +82,34 @@ def freeze_baseline(model, df: pd.DataFrame, meta: dict) -> dict:
     raise NotImplementedError
 
 
+def load_reference_set() -> pd.DataFrame:
+    """Charge le jeu de référence, avec un garde-fou sur sa validité.
+
+    Le jeu de référence est VOTRE instrument de mesure : vous le construisez
+    à partir du holdout M1 (cf. `data/README.md`). Le fichier
+    `reference_set_TEMPLATE.csv` livré dans le repo est un **exemple de
+    format** de 20 lignes, pas un jeu de référence utilisable.
+    """
+    if not REFERENCE_SET.exists():
+        raise SystemExit(
+            f"{REFERENCE_SET} est absent.\n"
+            "Ce fichier n'est pas fourni : c'est à vous de le construire à "
+            "partir du holdout M1 (`data/lending_club_holdout.csv`).\n"
+            "Mode d'emploi : data/README.md — étape 0."
+        )
+    df = pd.read_csv(REFERENCE_SET)
+    if len(df) < 100 or df.iloc[:, -1].nunique() < 2:
+        raise SystemExit(
+            f"{REFERENCE_SET} contient {len(df)} ligne(s) et "
+            f"{df.iloc[:, -1].nunique()} classe(s) de cible.\n"
+            "Un instrument de mesure a besoin des DEUX classes et d'assez "
+            "d'observations de la classe rare (~500 lignes attendues).\n"
+            "Avez-vous copié reference_set_TEMPLATE.csv ? C'est un exemple de "
+            "format, pas un jeu de référence — cf. data/README.md."
+        )
+    return df
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--release-tag", default="dev")
@@ -91,7 +119,7 @@ def main() -> int:
 
     model = joblib.load(MODELS_DIR / "pyrenex_risk_v2.joblib")
     meta = json.loads((MODELS_DIR / "pyrenex_risk_v2.json").read_text(encoding="utf-8"))
-    df = pd.read_csv(REFERENCE_SET)
+    df = load_reference_set()
 
     if args.freeze_baseline:
         print(json.dumps(freeze_baseline(model, df, meta), indent=2))

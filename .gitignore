@@ -11,6 +11,10 @@ logs/*.log.gz
 # MLflow tracking local (uploadé en artefact CI, pas committé)
 mlruns/
 
+# Holdout M1 complet (~6 k lignes) : source de travail, pas un livrable.
+# Seul le sous-échantillon que vous en tirez (data/reference_set.csv) est versionné.
+data/lending_club_holdout.csv
+
 # Secrets & config locale — JAMAIS committés
 .env
 .env.*
