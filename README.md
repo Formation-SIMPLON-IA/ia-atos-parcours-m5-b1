@@ -27,12 +27,12 @@ dans l'ordre, avec le bon appui. Les autres supports ont chacun un rôle précis
 
 | Quand | Tâche | Durée | Appui |
 |---|---|---|---|
-| Mardi 10h45 | 1. Tirage binôme + appropriation de la reprise M1 (modèle + API fournis) | 45 min | — |
-| Mardi 11h30 | 2. Architecture 3 services (`model` / `backend` / `frontend`) — début | 1h | [`01_Docker_compose`](./ressources/01_Docker_compose_multiservices_essentiel.md) |
+| Mardi 10h35 | 1. Tirage binôme + appropriation de la reprise M1 (modèle + API fournis) | 45 min | — |
+| Mardi 11h20 | 2. Architecture 3 services (`model` / `backend` / `frontend`) — 1ʳᵉ partie | 1h10 | [`01_Docker_compose`](./ressources/01_Docker_compose_multiservices_essentiel.md) |
 | Mardi 12h30 | 4. 🍽️ Déjeuner | 1h | — |
-| Mardi 13h30 | 2. Architecture 3 services — fin | 30 min | [`01_Docker_compose`](./ressources/01_Docker_compose_multiservices_essentiel.md) |
-| Mardi 14h00 | 3. Vérification `docker compose up` | 15 min | [`01_Docker_compose`](./ressources/01_Docker_compose_multiservices_essentiel.md) |
-| Mardi 14h15 | 5. Pipeline CI/CD GitHub Actions + *quality gate* (pause 15 min incluse) | 2h30 | [`03_GitHub_Actions`](./ressources/03_GitHub_Actions_CI_CD_essentiel.md) — appui [`06_Pair_coding`](./ressources/06_Pair_coding_sync_long_essentiel.md) |
+| Mardi 13h30 | 2. Architecture 3 services — fin | 20 min | [`01_Docker_compose`](./ressources/01_Docker_compose_multiservices_essentiel.md) |
+| Mardi 13h50 | 3. Vérification `docker compose up` | 15 min | [`01_Docker_compose`](./ressources/01_Docker_compose_multiservices_essentiel.md) |
+| Mardi 14h05 | 5. Pipeline CI/CD GitHub Actions + *quality gate* (pause 15 min incluse) | 2h30 | [`03_GitHub_Actions`](./ressources/03_GitHub_Actions_CI_CD_essentiel.md) — appui [`06_Pair_coding`](./ressources/06_Pair_coding_sync_long_essentiel.md) |
 | Mardi 16h45 | 6. Mur réflexif intermédiaire | 15 min | — |
 | Mercredi 9h15 | 7. Endpoint `/metrics` + métriques métier | 30 min | [`02_FastAPI_metrics_Prometheus`](./ressources/02_FastAPI_metrics_Prometheus_essentiel.md) |
 | Mercredi 9h45 | 8. Prometheus + Grafana dans le compose | 30 min | [`02_FastAPI_metrics_Prometheus`](./ressources/02_FastAPI_metrics_Prometheus_essentiel.md) |
@@ -42,7 +42,7 @@ dans l'ordre, avec le bon appui. Les autres supports ont chacun un rôle précis
 | Mercredi 12h30 | 12. Mur réflexif final M5-B1 + lancement M5-B2 | 30 min | — |
 
 > ⏱️ **Le jalon qui compte** : vos 3 services doivent démarrer **avant
-> d'attaquer la CI**. Si la tâche 3 n'est pas verte à 14h15, appelez —
+> d'attaquer la CI**. Si la tâche 3 n'est pas verte à 14h05, appelez —
 > la tâche 5 est la plus longue des deux jours, elle ne se rattrape pas.
 
 ### M5-B2 — l'async individuel (jeudi + vendredi matin, 6 h)
