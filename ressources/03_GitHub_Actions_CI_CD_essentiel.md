@@ -30,6 +30,40 @@ Actions est le choix naturel — gratuit sur repo public, registry GHCR inclus.
   jamais de secret en clair dans le YAML.
 - **GHCR** : `ghcr.io/<org>/<image>` — le registry d'images de GitHub.
 
+### 🚦 Le *quality gate* — le mot que vous verrez dans le planning
+
+Un **quality gate** est un *point de passage qui refuse la livraison* quand un
+critère n'est pas tenu. Il n'existe **aucun mot-clé** `quality_gate` dans
+GitHub Actions : la gate, concrètement, c'est le **`needs:` du job qui
+publie**. `build-and-push` `needs: [test]` → tests rouges, pas d'image poussée,
+pas de release.
+
+Deux conséquences qui coûtent cher si on les découvre en prod :
+
+- **Ce que la CI ne lance pas n'existe pas.** Des tests commités mais qu'aucun
+  job n'exécute ne bloquent rien — le workflow est vert *parce qu'il ne teste
+  rien*.
+- **Un job rouge hors de la chaîne `needs:` du job qui publie ne bloque rien
+  non plus.** Deux jobs frères qui dépendent des mêmes parents s'ignorent
+  l'un l'autre : l'un peut échouer pendant que l'autre pousse l'image. Un
+  voyant rouge qui ne bloque rien est **pire** qu'une absence de garde-fou,
+  parce qu'on se croit protégé.
+
+Et surtout, la vraie question : **la gate contrôle quoi ?**
+
+| | Ce que la gate bloque | Sur quoi |
+|---|---|---|
+| **M5-B1** | un contrat **technique** : l'API répond et respecte sa signature | `pytest services/model/tests` |
+| **M5-B2** | un contrat de **performance** : métriques sous les seuils | `evaluate_model.py` (exit ≠ 0), cf. mini-cours 08 |
+
+Une CI verte en B1 ne dit **rien** sur la qualité du modèle qui part en prod.
+C'est exactement pour ça que B2 existe.
+
+> ⚠️ **Une gate qu'on n'a jamais vue rouge n'est pas une gate.** Cassez un test
+> volontairement, poussez, vérifiez que le job de publication affiche
+> `skipped`, puis remettez en état. Gardez les deux captures : c'est votre
+> preuve que le garde-fou est branché.
+
 ## Exemple minimal qui tourne
 
 ```yaml
