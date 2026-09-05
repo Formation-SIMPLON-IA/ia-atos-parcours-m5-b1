@@ -24,7 +24,14 @@ def test_predict_valid_returns_class_and_proba(client, valid_payload):
     body = resp.json()
     assert body["prediction"] in (0, 1)
     assert 0.0 <= body["probability"] <= 1.0
-    assert body["model_version"] == "v2.0.0"
+    # La version annoncée par l'API doit correspondre à l'artefact chargé.
+    # On ne fige surtout PAS une valeur en dur : le jour où le modèle est
+    # réentraîné, un `== "v2.0.0"` ferait échouer ce job — et comme le build
+    # a `needs: test`, l'image ne serait jamais construite. Un test doit
+    # vérifier un contrat (cohérence), pas geler une constante.
+    meta = json.loads((MODELS_DIR / "pyrenex_risk_v2.json").read_text(encoding="utf-8"))
+    assert body["model_version"] == meta["model_version"]
+    assert body["model_version"]  # non vide
 
 
 def test_predict_invalid_returns_422(client, valid_payload):
